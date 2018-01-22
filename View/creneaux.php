@@ -2,6 +2,7 @@
     include "../Controller/creneauController.php";
     require_once "header.inc.php";
 
+    //date_default_timezone_set('UTC');
 
 /* @var $cmd type */
     //$cmd = @$_POST['cmd'];
@@ -14,10 +15,11 @@
     if (($cmd == 'add')&&(count($_POST)>5)){
         //récupération et protection des données envoyées
         $commentaireAvant = mysqli_real_escape_string($cnxDb,$_POST['commentaireAvant']);
-        $date = $_POST['dateC'];
+        $date = new DateTime($_POST['dateC']);
         $duree = $_POST['duree'];
         $timestamp = $date->getTimestamp();
-        $dateActuelle = Date();
+        $dateActuelle = time();
+        echo  $dateActuelle;
         $libre = mysqli_real_escape_string($cnxDb,$_POST['libre']);
         $lib = ($libre == 'Y')? true:false;
 

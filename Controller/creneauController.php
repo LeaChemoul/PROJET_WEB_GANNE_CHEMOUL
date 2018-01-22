@@ -22,3 +22,11 @@
         deleteCreneau($cnxDb,$item);
     }
 
+    //ADD
+    if(isset($cmd) && $cmd=='add'){
+        $duree=filter_input(INPUT_GET,'duree',FILTER_SANITIZE_NUMBER_FLOAT);
+        $dateActuelle=filter_input(INPUT_GET,'dateActuelle',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $libre=$_POST['lib']; //a modifier
+        $commAvant=filter_input(INPUT_GET,'commentaireAvant',FILTER_SANITIZE_STRING);
+        addCreneau($cnxDb,$duree,$dateActuelle,$libre,$commAvant);
+    }

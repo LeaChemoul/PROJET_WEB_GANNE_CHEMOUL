@@ -15,8 +15,8 @@ if ($cmd == 'update' && $item != 0){
 }
 if (!isset($unCreneau)){
     $unCreneau = new stdClass();
-    $unCreneau->dateDebut = '';
-    $unCreneau->duree = '';
+    $unCreneau->dateDebut = time();
+    $unCreneau->duree = '0';
     $unCreneau->exclusivite = '';
     $unCreneau->libre = true;
     $unCreneau->commentaireAvant = '';
@@ -52,7 +52,7 @@ if (!isset($unCreneau)){
                         <b>Duree</b>
                     </td>
                     <td>
-                        <input type="time" name="duree" value=<?php echo gmdate("H:i:s", $unCreneau->duree);?>>
+                        <input type="time" name="duree" value=<?php echo gmdate("H:i", $unCreneau->duree);?>>
                 </tr>
                 <tr>
                     <td>
