@@ -5,26 +5,27 @@ require_once "header.inc.php";
 include "../Model/setup.inc.php";
 include "../Controller/creneauController.php";
 
+
 /* $cmd = @$_REQUEST['cmd'];
  $item = @$_REQUEST['item'];
  */
 $cmd = filter_input(INPUT_GET, 'cmd',FILTER_SANITIZE_STRING);
-$item = filter_input(INPUT_GET, 'item',FILTER_SANITIZE_NUMBER_INT); 
-
+$item = filter_input(INPUT_GET, 'item',FILTER_SANITIZE_NUMBER_INT);
  
 if ($cmd == 'update' && $item != 0){
     $unCreneau = getCreneauByItem($cnxDb,$item);
 }
 if (!isset($unCreneau)){
     $unCreneau = new stdClass();
-    $unCreneau->dateDebut = time();
+    $date = new DateTime();
+    $unCreneau->dateDebut = $date->format('Y-m-d H:i:s');;
     $unCreneau->duree = '0';
     $unCreneau->exclusivite = false;
     $unCreneau->libre = true;
     $unCreneau->commentaireAvant = '';
     $unCreneau->commentaireApres = '';
     $unCreneau->aEuLieu = false;
-    $unCreneau->note = '0';
+    $unCreneau->note = '';
 }
 ?>
 <!DOCTYPE html>
@@ -45,7 +46,7 @@ if (!isset($unCreneau)){
                         <b>Date de début</b>
                     </td>
                     <td>
-                    <input type="datetime-local" name="dateC" value="<?php
+                    <input type="datetime-local" name="dateC" required value="<?php
                     echo date('Y-m-d\TH:i:s', strtotime($unCreneau->dateDebut));
                     ?>">
                     </td>
@@ -55,7 +56,7 @@ if (!isset($unCreneau)){
                         <b>Duree</b>
                     </td>
                     <td>
-                        <input type="time" name="duree" value=<?php echo gmdate("H:i:s", $unCreneau->duree);?>>
+                        <input type="time" name="duree" required value=<?php echo gmdate("H:i:s", $unCreneau->duree);?>>
                 </tr>
                 <tr>
                     <td>
@@ -76,7 +77,7 @@ if (!isset($unCreneau)){
                         <b>Créneau exclusif (pas d'autre créneau au même moment)</b>
                     </td>
                     <td>
-                        <input type="checkbox" name="exclusif" value = "Y" <?php if ($unCreneau->exclusivite == true)echo "checked" ?>>
+                        <input type="checkbox" name="exclu" value = "Y" <?php if ($unCreneau->exclusivite == true)echo "checked" ?>>
                     </td>
                 </tr>
                 <tr height="100">
@@ -101,7 +102,7 @@ if (!isset($unCreneau)){
                         <b>La soutenance a eu lieu</b>
                     </td>
                     <td>
-                        <input type="checkbox" name="libre" value = "Y" <?php if ($unCreneau->aEuLieu == true)echo "checked" ?>>
+                        <input type="checkbox" name="aEuLieu" value = "Y" <?php if ($unCreneau->aEuLieu == true)echo "checked" ?>>
                     </td>
                 </tr>
                 <tr height="100">
@@ -109,7 +110,7 @@ if (!isset($unCreneau)){
                         <b>Commentaire après soutenance</b>
                     </td>
                     <td>
-                        <textarea style="width : 100% ; height : 100%" name="commentaireAprès"><?php echo $unCreneau->commentaireApres ?></textarea>
+                        <textarea style="width : 100% ; height : 100%" name="commentaireApres"><?php echo $unCreneau->commentaireApres ?></textarea>
                     </td>
                 </tr>
                 <tr>
@@ -117,7 +118,7 @@ if (!isset($unCreneau)){
                         <b>Note de soutenance (/20)</b>
                     </td>
                     <td>
-                        <input type="number" max=20 name="duree" value=<?php echo $unCreneau->note;?>>
+                        <input type="number" max=20 name="note" value=<?php echo $unCreneau->note;?>>
                 </tr>
                 <tr>
                     <td colspan="2">

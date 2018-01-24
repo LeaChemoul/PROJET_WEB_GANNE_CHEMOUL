@@ -5,6 +5,64 @@
     require_once "../Model/setup.inc.php";
     require_once "../Model/functions.inc.php";
 
+    //DELETE
+    if (isset($cmd) && $cmd == 'delete'){
+        $item = filter_input(INPUT_GET, 'item',FILTER_SANITIZE_NUMBER_INT);
+        deleteCreneau($cnxDb,$item);
+    }
+
+    //ADD
+    if(isset($cmd) && $cmd=='add'){
+        $dateDebut = new DateTime($_POST['dateC']);
+        $date = $dateDebut->getTimestamp();
+        $duree=filter_input(INPUT_POST,'duree',FILTER_SANITIZE_NUMBER_FLOAT);
+        if(isset($_POST['exclu']))
+            $exclusif = ($_POST['exclu'] == 'Y')? true:false;
+        else $exclusif = false;
+        if(isset($_POST['libre']))
+            $lib = ($_POST['libre'] == 'Y')? true:false;
+        else $lib = true;
+        $libre = ($lib == "Y")? true:false;
+        $idProf = filter_input(INPUT_POST,'prof',FILTER_SANITIZE_NUMBER_FLOAT);
+        $commAv =$_POST['commentaireAvant'];
+        if(isset($_POST['aEuLieu']))
+            $aEuLieu = ($_POST['aEuLieu'] == 'Y')? true:false;
+        else $aEuLieu = false;
+        $commAp =filter_input(INPUT_POST,'commentaireApres',FILTER_SANITIZE_STRING);
+        if($commAp == "")
+            $commAp = NULL;
+        $note = filter_input(INPUT_POST,'note',FILTER_SANITIZE_NUMBER_FLOAT);
+        if($note == "")
+            $note = NULL;
+        addCreneau($cnxDb,$idProf,$duree,$date,$exclusif,$libre,$commAv,$aEuLieu,$commAp,$note);
+    }
+
+    //UPDATE
+    if (isset($cmd) && $cmd == 'update' && $item != 0){
+        $dateDebut = new DateTime($_POST['dateC']);
+        $date = $dateDebut->getTimestamp();
+        $duree=filter_input(INPUT_POST,'duree',FILTER_SANITIZE_NUMBER_FLOAT);
+        if(isset($_POST['exclu']))
+            $exclusif = ($_POST['exclu'] == 'Y')? true:false;
+        else $exclusif = false;
+        if(isset($_POST['libre']))
+            $lib = ($_POST['libre'] == 'Y')? true:false;
+        else $lib = true;
+        $libre = ($lib == "Y")? true:false;
+        $idProf = filter_input(INPUT_POST,'prof',FILTER_SANITIZE_NUMBER_FLOAT);
+        $commAv =$_POST['commentaireAvant'];
+        if(isset($_POST['aEuLieu']))
+            $aEuLieu = ($_POST['aEuLieu'] == 'Y')? true:false;
+        else $aEuLieu = false;
+        $commAp =filter_input(INPUT_POST,'commentaireApres',FILTER_SANITIZE_STRING);
+        if($commAp == "")
+            $commAp = NULL;
+        $note = filter_input(INPUT_POST,'note',FILTER_SANITIZE_NUMBER_FLOAT);
+        if($note == "")
+            $note = NULL;
+        updateCreneau($cnxDb,$item,$date,$duree,$idProf,$exclusif,$commAv,$libre,$aEuLieu,$commAp,$note);
+    }
+
     //Recupération des créneaux
     $listeCreneau = Array();
     $listeProfs = Array();
@@ -21,34 +79,4 @@
         while ($row = $profBDD->fetch_assoc()) {
             $listeProfs[$row["idProf"]]=["nom" => $row ["nom"],"prenom"=>$row["prenom"]];
         }
-    }
-
-    //DELETE
-    if (isset($cmd) && $cmd == 'delete'){
-        $item = filter_input(INPUT_GET, 'item',FILTER_SANITIZE_NUMBER_INT);
-        deleteCreneau($cnxDb,$item);
-    }
-
-    //ADD
-    if(isset($cmd) && $cmd=='add'){
-        $duree=filter_input(INPUT_POST,'duree',FILTER_SANITIZE_NUMBER_FLOAT);
-        $dateDebut = filter_input(INPUT_GET,'dateC','(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})');
-        $date = $dateDebut->getTimestamp();
-        $idProf = filter_input(INPUT_POST,'prof',FILTER_SANITIZE_NUMBER_FLOAT);
-        $commAv =filter_input(INPUT_POST,'commentaireAvant',FILTER_SANITIZE_STRING);
-        $commAp =filter_input(INPUT_POST,'commentaireApres',FILTER_SANITIZE_STRING);
-        $lib = $_POST['libre'];
-        $libre = ($lib == "Y")? true:false;
-        $exclusif = $_POST['exclusif'];
-        $aEuLieu = $_POST['exclusif'];
-        $note = filter_input(INPUT_POST,'duree',FILTER_SANITIZE_NUMBER_FLOAT);
-
-
-        addCreneau($cnxDb,$duree,$dateActuelle,$libre,$commAvant);
-    }
-    
-    if (isset($cmd) && $cmd == 'update' && $item != 0){
-        $duree = filter_input(INPUT_POST,'duree',FILTER_SANITIZE_NUMBER_FLOAT);
-
-        updateCreneau($cnxDb,$item,$date,$duree,$idp,$exclusivite,$commAv,$libre,$aEulieu,$commAp,$note);
     }

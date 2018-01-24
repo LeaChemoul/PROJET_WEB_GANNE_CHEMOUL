@@ -1,12 +1,27 @@
+-- phpMyAdmin SQL Dump
+-- version 4.7.0
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1
+-- Généré le :  mer. 24 jan. 2018 à 22:13
+-- Version du serveur :  10.1.26-MariaDB
+-- Version de PHP :  7.1.8
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
 -- Base de données :  `dbcreneau`
 --
--- UPDATE `creneau` SET `idProf` = '10', `dateDebut` = '2018-01-23 23:02:28', `duree` = '138', `exclusivite` = '1', `libre` = '1', `commentaireAvant` = 'Apporter des stylos !', `aEuLieu` = '1', `commentaireApres` = 'Élève intéressant et plein d\'enthousiasme.', `note` = '18' WHERE `creneau`.`id` = 1;
+
 -- --------------------------------------------------------
 
 --
@@ -32,7 +47,12 @@ CREATE TABLE `creneau` (
 --
 
 INSERT INTO `creneau` (`id`, `idProf`, `dateDebut`, `duree`, `exclusivite`, `datePublic`, `libre`, `commentaireAvant`, `aEuLieu`, `commentaireApres`, `note`) VALUES
-(1, 0, '2018-01-20 22:02:28', 135, 0, '2017-11-07 03:30:03', 0, 'Apporter des stylos', 0, NULL, NULL);
+(1, 0, '0000-00-00 00:00:00', 0, 0, '2017-11-07 03:30:03', 1, '', 0, '', 0),
+(6, 0, '0000-00-00 00:00:00', 3840, 1, '0000-00-00 00:00:00', 1, 'Un commentaire.', 1, 'Parfait.', 20),
+(7, 10, '2018-01-24 21:06:56', 0, 1, '0000-00-00 00:00:00', 1, 'Venir en avance.', 0, '', 0),
+(8, 10, '2018-01-24 21:07:02', 0, 1, '0000-00-00 00:00:00', 1, 'Venir en avance.', 0, '', 0),
+(16, 0, '0000-00-00 00:00:00', 2320, 0, '0000-00-00 00:00:00', 0, 'Pas de commentaire', 1, 'Blabla', 10),
+(17, 1, '0000-00-00 00:00:00', 1100, 0, '0000-00-00 00:00:00', 1, 'Se prÃ©senter 10 min Ã  l\'avance.', 0, '', 0);
 
 -- --------------------------------------------------------
 
@@ -61,9 +81,13 @@ INSERT INTO `professeur` (`idProf`, `nom`, `prenom`) VALUES
 (7, 'Berger', 'Marc'),
 (8, 'Hubert', 'Annie'),
 (9, 'Roger', 'Marie'),
-(10, 'André', 'Paul'),
-(11, 'Carlisle', 'Henry'),
-(12, 'Claudet', 'Antoine');
+(10, 'Carlisle', 'Henry'),
+(11, 'Claudet', 'Antoine'),
+(12, 'André', 'Paul');
+
+--
+-- Index pour les tables déchargées
+--
 
 --
 -- Index pour la table `creneau`
@@ -79,10 +103,17 @@ ALTER TABLE `professeur`
   ADD PRIMARY KEY (`idProf`);
 
 --
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
 -- AUTO_INCREMENT pour la table `creneau`
 --
 ALTER TABLE `creneau`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+--
+-- Contraintes pour les tables déchargées
+--
 
 --
 -- Contraintes pour la table `creneau`
@@ -90,3 +121,7 @@ ALTER TABLE `creneau`
 ALTER TABLE `creneau`
   ADD CONSTRAINT `creneau_ibfk_1` FOREIGN KEY (`idProf`) REFERENCES `professeur` (`idProf`);
 COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
