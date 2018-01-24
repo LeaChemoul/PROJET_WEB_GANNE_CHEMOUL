@@ -6,7 +6,7 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `dbcreneau`
 --
-
+-- UPDATE `creneau` SET `idProf` = '10', `dateDebut` = '2018-01-23 23:02:28', `duree` = '138', `exclusivite` = '1', `libre` = '1', `commentaireAvant` = 'Apporter des stylos !', `aEuLieu` = '1', `commentaireApres` = 'Élève intéressant et plein d\'enthousiasme.', `note` = '18' WHERE `creneau`.`id` = 1;
 -- --------------------------------------------------------
 
 --
