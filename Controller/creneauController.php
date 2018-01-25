@@ -10,8 +10,7 @@
 
     //ADD
     if(isset($cmd) && $cmd=='add'){
-        $dateDebut = new DateTime($_POST['dateC']);
-        $date = $dateDebut->getTimestamp();
+        $dateDebut = date_create($_POST['dateC'])->format("Y-m-d\TH:i:s");
         $duree=filter_input(INPUT_POST,'duree',FILTER_SANITIZE_NUMBER_FLOAT);
         if(isset($_POST['exclu']))
             $exclusif = ($_POST['exclu'] == 'Y')? true:false;
@@ -31,13 +30,12 @@
         $note = filter_input(INPUT_POST,'note',FILTER_SANITIZE_NUMBER_FLOAT);
         if($note == "")
             $note = NULL;
-        addCreneau($cnxDb,$idProf,$duree,$date,$exclusif,$libre,$commAv,$aEuLieu,$commAp,$note);
+        addCreneau($cnxDb,$idProf,$duree,$dateDebut,$exclusif,$libre,$commAv,$aEuLieu,$commAp,$note);
     }
 
     //UPDATE
     if (isset($cmd) && $cmd == 'update' && $item != 0){
-        $dateDebut = new DateTime($_POST['dateC']);
-        $date = $dateDebut->getTimestamp();
+        $dateDebut = date_create($_POST['dateC'])->format("Y-m-d\TH:i:s");
         $duree=filter_input(INPUT_POST,'duree',FILTER_SANITIZE_NUMBER_FLOAT);
         if(isset($_POST['exclu']))
             $exclusif = ($_POST['exclu'] == 'Y')? true:false;
@@ -57,7 +55,7 @@
         $note = filter_input(INPUT_POST,'note',FILTER_SANITIZE_NUMBER_FLOAT);
         if($note == "")
             $note = NULL;
-        updateCreneau($cnxDb,$item,$date,$duree,$idProf,$exclusif,$commAv,$libre,$aEuLieu,$commAp,$note);
+        updateCreneau($cnxDb,$item,$dateDebut,$duree,$idProf,$exclusif,$commAv,$libre,$aEuLieu,$commAp,$note);
     }
 
     //Recupération des créneaux
