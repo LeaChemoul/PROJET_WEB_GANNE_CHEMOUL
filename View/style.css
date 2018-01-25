@@ -9,6 +9,7 @@ table {
     border-radius:15px;
     margin-left: auto; margin-right: auto;
 }
+
 th {
     font-family: monospace;
     width: 50%;
@@ -26,8 +27,8 @@ td {
 }
 
 td:hover{
-    background-color: #eadeb8;
-
+    background-color: hotpink;
+    color : white;
 }
 
 #bgimg{
@@ -53,6 +54,53 @@ h1,h2{
     margin-right: auto;
 }
 
-.navbar{
-    background-color: bisque;
+/*#volet {
+    position: relative;
+    left: -400px; top : -500px;
+    width: 300px;
+    padding: 10px;
+    background: #6B9A49; color: #fff;
+    -webkit-transition: all .5s ease-in;
+    transition: all .5s ease-in;
 }
+#volet a.fermer {
+    display: none;
+}
+
+#volet a.ouvrir,
+#volet a.fermer {
+
+    padding: 10px 25px;
+    background: #555;
+    color: #fff;
+    text-decoration: none;
+    position: absolute;
+    right: -88px;
+    top: 150px;
+
+    /* quelques styles CSS3 */
+    /*-ms-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    transform: rotate(270deg);
+
+    border-radius: 0 0 8px 8px;
+}
+
+#volet:target {
+    left: 0;
+}
+
+#volet_clos:target #volet {
+    left: -270px;
+}
+#volet:target a.ouvrir {
+    display: none;
+}
+#volet:target a.fermer {
+    display: block;
+}
+
+.editCren{
+    width: 400px;
+}*/

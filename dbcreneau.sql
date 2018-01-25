@@ -45,13 +45,13 @@ CREATE TABLE `creneau` (
 -- Déchargement des données de la table `creneau`
 --
 
-INSERT INTO `creneau` (`id`, `idProf`, `dateDebut`, `duree`, `exclusivite`, `datePublic`, `libre`, `commentaireAvant`, `aEuLieu`, `commentaireApres`, `note`) VALUES
-(1, 0, '0000-00-00 00:00:00', 0, 0, '2017-11-07 03:30:03', 1, '', 0, '', 0),
-(6, 0, '0000-00-00 00:00:00', 3840, 1, '0000-00-00 00:00:00', 1, 'Un commentaire.', 1, 'Parfait.', 20),
-(7, 10, '2018-01-24 21:06:56', 0, 1, '0000-00-00 00:00:00', 1, 'Venir en avance.', 0, '', 0),
-(8, 10, '2018-01-24 21:07:02', 0, 1, '0000-00-00 00:00:00', 1, 'Venir en avance.', 0, '', 0),
-(16, 0, '0000-00-00 00:00:00', 2320, 0, '0000-00-00 00:00:00', 0, 'Pas de commentaire', 1, 'Blabla', 10),
-(17, 1, '0000-00-00 00:00:00', 1100, 0, '0000-00-00 00:00:00', 1, 'Se prÃ©senter 10 min Ã  l\'avance.', 0, '', 0);
+INSERT INTO `creneau` (`id`, `idProf`, `dateDebut`, `duree`, `exclusivite`, `datePublic`, `libre`, `commentaireAvant`, `commentaireApres`, `note`) VALUES
+(1, 0, '0000-00-00 00:00:00', 0, 0, '2017-11-07 03:30:03', 1, '','', 0),
+(6, 0, '0000-00-00 00:00:00', 3840, 1, '0000-00-00 00:00:00', 1, 'Un commentaire.','Parfait.', 20),
+(7, 10, '2018-01-24 21:06:56', 0, 1, '0000-00-00 00:00:00', 1, 'Venir en avance.','', 0),
+(8, 10, '2018-01-24 21:07:02', 0, 1, '0000-00-00 00:00:00', 1, 'Venir en avance.','', 0),
+(16, 0, '0000-00-00 00:00:00', 2320, 0, '0000-00-00 00:00:00', 0, 'Pas de commentaire','Blabla', 10),
+(17, 1, '0000-00-00 00:00:00', 1100, 0, '0000-00-00 00:00:00', 1, 'Se prÃ©senter 10 min Ã  l\'avance.','', 0);
 
 -- --------------------------------------------------------
 

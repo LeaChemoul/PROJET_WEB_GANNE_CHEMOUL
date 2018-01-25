@@ -21,16 +21,13 @@
         $libre = ($lib == "Y")? true:false;
         $idProf = filter_input(INPUT_POST,'prof',FILTER_SANITIZE_NUMBER_FLOAT);
         $commAv =$_POST['commentaireAvant'];
-        if(isset($_POST['aEuLieu']))
-            $aEuLieu = ($_POST['aEuLieu'] == 'Y')? true:false;
-        else $aEuLieu = false;
         $commAp =filter_input(INPUT_POST,'commentaireApres',FILTER_SANITIZE_STRING);
         if($commAp == "")
             $commAp = NULL;
         $note = filter_input(INPUT_POST,'note',FILTER_SANITIZE_NUMBER_FLOAT);
         if($note == "")
             $note = NULL;
-        addCreneau($cnxDb,$idProf,$duree,$dateDebut,$exclusif,$libre,$commAv,$aEuLieu,$commAp,$note);
+        addCreneau($cnxDb,$idProf,$duree,$dateDebut,$exclusif,$libre,$commAv,$commAp,$note);
     }
 
     //UPDATE
@@ -46,16 +43,13 @@
         $libre = ($lib == "Y")? true:false;
         $idProf = filter_input(INPUT_POST,'prof',FILTER_SANITIZE_NUMBER_FLOAT);
         $commAv =filter_input(INPUT_POST,'commentaireAvant',FILTER_SANITIZE_STRING);
-        if(isset($_POST['aEuLieu']))
-            $aEuLieu = ($_POST['aEuLieu'] == 'Y')? true:false;
-        else $aEuLieu = false;
         $commAp =filter_input(INPUT_POST,'commentaireApres',FILTER_SANITIZE_STRING);
         if($commAp == "")
             $commAp = NULL;
         $note = filter_input(INPUT_POST,'note',FILTER_SANITIZE_NUMBER_FLOAT);
         if($note == "")
             $note = NULL;
-        updateCreneau($cnxDb,$item,$dateDebut,$duree,$idProf,$exclusif,$commAv,$libre,$aEuLieu,$commAp,$note);
+        updateCreneau($cnxDb,$item,$dateDebut,$duree,$idProf,$exclusif,$commAv,$libre,$commAp,$note);
     }
 
     //Recupération des créneaux

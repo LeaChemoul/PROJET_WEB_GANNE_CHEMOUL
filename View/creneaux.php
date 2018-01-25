@@ -16,11 +16,22 @@
         </div>
         <h1> Carnet de rendez-vous </h1>
         <h2> Créneaux de soutenance </h2>
-        <nav class="navbar">
-            <ul class="nav navbar-nav">
-              <li><a href="creneaux.php">Acceuil</a></li>
-              <li><a href="editCreneau.php">Ajouter un créneau.</a></li>
-            </ul>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="home.php">Soutenance</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation" style="">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor02">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="creneaux.php">Accueil <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="editCreneau.php">Ajouter un créneau</a>
+                    </li>
+                </ul>
+            </div>
         </nav>
         <div class="edition">
             <table width="100%">
@@ -58,7 +69,7 @@
                                     <?php echo "Créneau " . $nbr; $nbr = $nbr + 1; ?>
                                 </td>
                                 <td>
-                                    <?php echo date('Y-m-d\TH:i:s', strtotime($unCreneau['dateDebut'])) ?>
+                                    <?php echo date('Y-m-d H:i:s', strtotime($unCreneau['dateDebut'])) ?>
                                 </td>
                                 <td>
                                     <?php echo gmdate("H:i:s", $unCreneau['duree']) ?>
@@ -74,7 +85,7 @@
                                     ?>
                                 </td>
                                 <td>
-                                    <?php echo "$unCreneau[datePublic]" ?>
+                                    <?php echo date('Y-m-d H:i:s', strtotime($unCreneau['datePublic'])); ?>
                                 </td>
                                 <td>
                                     <?php if($unCreneau['libre']==true){ echo "Oui";}
@@ -93,8 +104,8 @@
                                     <?php echo "$unCreneau[note]" ?>
                                 </td>
                                 <td>
-                                    <a href="creneaux.php?cmd=delete&item=<?php echo $key ?>">Supprimer</a>
-                                    <a href="editCreneau.php?cmd=update&item=<?php echo $key ?>">Modifier</a>
+                                    <a class="btn btn-link" href="creneaux.php?cmd=delete&item=<?php echo $key ?>">Supprimer</a>
+                                    <a class="btn btn-link" href="editCreneau.php?cmd=update&item=<?php echo $key ?>">Modifier</a>
                                 </td>
                             </tr>
                             <?php
@@ -103,8 +114,11 @@
                         ?>
                         <tr>
                             <td>
-                                <a href="editCreneau.php?cmd=add">Ajouter</a>
+                                <a href="editCreneau.php?cmd=add" class="btn btn-outline-danger">Ajouter</a>
                             </td>
+                            <td>
+                                <input type="button" class="btn btn-outline-danger" value="Afficher/Cacher les professeurs" onclick="masquer_div('professeur');" />
+                            <td>
                         </tr>
                     </tbody>
 
@@ -113,7 +127,6 @@
             <br/>
             <br/>
             <br/>
-            <input type="button" class="btn btn-info" value="Afficher/Cacher les professeurs" onclick="masquer_div('professeur');" />
             <div id="professeur" style="display:none;">
                 <table width="100%">
                 <?php
