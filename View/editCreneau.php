@@ -26,6 +26,8 @@ if (!isset($unCreneau)){
     $unCreneau->commentaireApres = '';
     $unCreneau->note = '';
 }
+$dateDebForm=new DateTime(($unCreneau->dateDebut));
+echo $dateDebForm->format('Y-m-d H:i:s');
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,7 +43,8 @@ if (!isset($unCreneau)){
                     </td>
                     <td>
                     <input type="datetime-local" name="dateC" required value="<?php
-                    echo date('Y-m-d\TH:i:s', strtotime($unCreneau->dateDebut));
+                    //echo date('Y-m-d\TH:i:s', strtotime($unCreneau->dateDebut));
+                    echo $dateDebForm->format('Y-m-d H:i:s');
                     ?>">
                     </td>
                 </tr>
