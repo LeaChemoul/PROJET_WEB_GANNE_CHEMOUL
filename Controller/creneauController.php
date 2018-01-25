@@ -1,7 +1,4 @@
 <?php
-
-    $pagetitle = "Créneaux de soutenance";
-
     require_once "../Model/setup.inc.php";
     require_once "../Model/functions.inc.php";
 
@@ -50,7 +47,7 @@
         else $lib = true;
         $libre = ($lib == "Y")? true:false;
         $idProf = filter_input(INPUT_POST,'prof',FILTER_SANITIZE_NUMBER_FLOAT);
-        $commAv =$_POST['commentaireAvant'];
+        $commAv =filter_input(INPUT_POST,'commentaireAvant',FILTER_SANITIZE_STRING);
         if(isset($_POST['aEuLieu']))
             $aEuLieu = ($_POST['aEuLieu'] == 'Y')? true:false;
         else $aEuLieu = false;
@@ -71,7 +68,9 @@
 
     if($creneauBDD != FALSE){
         while ($row = $creneauBDD->fetch_assoc()) {
-            $listeCreneau[$row["id"]]=["idProf" => $row ["idProf"],"dateDebut"=>$row["dateDebut"],"duree"=>$row["duree"],"exclusivite"=>$row["exclusivite"],"datePublic"=>$row["datePublic"],"libre"=>$row["libre"],"commentaireAvant"=>$row["commentaireAvant"],"aEuLieu"=>$row["aEuLieu"],"commentaireApres"=>$row["commentaireApres"],"note"=>$row["note"]];
+            $listeCreneau[$row["id"]]=["idProf" => $row ["idProf"],"dateDebut"=>$row["dateDebut"],
+                "duree"=>$row["duree"],"exclusivite"=>$row["exclusivite"],"datePublic"=>$row["datePublic"],
+                "libre"=>$row["libre"],"commentaireAvant"=>$row["commentaireAvant"],"commentaireApres"=>$row["commentaireApres"],"note"=>$row["note"]];
         }
     }
 

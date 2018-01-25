@@ -19,22 +19,16 @@ if (!isset($unCreneau)){
     $unCreneau = new stdClass();
     $date = new DateTime();
     $unCreneau->dateDebut = $date->format('Y-m-d H:i:s');;
-    $unCreneau->duree = '0';
+    $unCreneau->duree = '-1';
     $unCreneau->exclusivite = false;
     $unCreneau->libre = true;
     $unCreneau->commentaireAvant = '';
     $unCreneau->commentaireApres = '';
-    $unCreneau->aEuLieu = false;
     $unCreneau->note = '';
 }
 ?>
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Edition d'un créneau</title>
-        <meta charset="utf-8">
-        <meta name="description" content="165c. uniques"> </head>
- 
     <body>
         <h2>Edition d'un créneau</h2>
         <form name="creneau" action="creneaux.php" method="POST">
@@ -95,14 +89,6 @@ if (!isset($unCreneau)){
                     <td>
                         <input type="radio" name="libre" value="Y" <?php if ($unCreneau->libre == true) echo "checked" ?> /> Oui
                         <input type="radio" name="libre" value="N" <?php if ($unCreneau->libre == false) echo "checked" ?> /> Non
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <b>La soutenance a eu lieu</b>
-                    </td>
-                    <td>
-                        <input type="checkbox" name="aEuLieu" value = "Y" <?php if ($unCreneau->aEuLieu == true)echo "checked" ?>>
                     </td>
                 </tr>
                 <tr height="100">

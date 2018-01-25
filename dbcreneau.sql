@@ -37,7 +37,6 @@ CREATE TABLE `creneau` (
   `datePublic` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `libre` tinyint(1) NOT NULL DEFAULT '0',
   `commentaireAvant` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `aEuLieu` tinyint(1) NOT NULL DEFAULT '0',
   `commentaireApres` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `note` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -62,9 +61,9 @@ INSERT INTO `creneau` (`id`, `idProf`, `dateDebut`, `duree`, `exclusivite`, `dat
 
 CREATE TABLE `professeur` (
   `idProf` int(11) NOT NULL,
-  `nom` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `prenom` varchar(20) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `nom` varchar(20) COLLATE utf8_general_ci NOT NULL,
+  `prenom` varchar(20) COLLATE utf8_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `professeur`
@@ -82,9 +81,7 @@ INSERT INTO `professeur` (`idProf`, `nom`, `prenom`) VALUES
 (8, 'Hubert', 'Annie'),
 (9, 'Roger', 'Marie'),
 (10, 'Carlisle', 'Henry'),
-(11, 'Claudet', 'Antoine'),
-(12, 'André', 'Paul');
-
+(11, 'Claudet', 'Antoine');
 --
 -- Index pour les tables déchargées
 --

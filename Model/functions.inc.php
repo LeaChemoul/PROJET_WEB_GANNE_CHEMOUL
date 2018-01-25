@@ -1,6 +1,7 @@
 <?php
     require_once "setup.inc.php";
 
+    //Récupération des créneaux
     function getCreneaux($cnxDb){
         $requeteBDD = "SELECT * FROM creneau";
 
@@ -9,6 +10,7 @@
         return $creneauBDD;
     }
     
+    //Récupération des professseurs
     function getProfesseurs($cnxDb){
         $requeteBDD = "SELECT * FROM professeur";
 
@@ -26,9 +28,9 @@
     }
 
     function addCreneau($cnxDb,$idProf,$duree,$dateActuelle,$excl,$lib,$commentaireAvant,$aEulieu,$commApres, $note){
-        //encodage pour la BDD
-        $commentaireAvant = mysqli_real_escape_string($cnxDb,$commentaireAvant);
-        $commApres = mysqli_real_escape_string($cnxDb,$commApres);
+    //encodage pour la BDD
+    $commentaireAvant = mysqli_real_escape_string($cnxDb,$commentaireAvant);
+    $commApres = mysqli_real_escape_string($cnxDb,$commApres);
     // création de la requête
     $query = "INSERT INTO creneau(idProf,dateDebut,duree,exclusivite,datePublic,libre,commentaireAvant,aEuLieu,commentaireApres,note) VALUES('$idProf','$dateActuelle','$duree','$excl','DATE()','$lib','$commentaireAvant','$aEulieu','$commApres','$note') ";
         echo $query;

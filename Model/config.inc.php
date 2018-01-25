@@ -7,7 +7,7 @@ $CFG->srvName = 'localhost';
 $CFG->port = ''; 
 $CFG->login = 'root'; 
 $CFG->password = ''; 
-$CFG->dbName = 'dbCreneau';
+$CFG->dbName = 'BDcreneau';
 
     
 
