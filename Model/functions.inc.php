@@ -9,6 +9,13 @@
 
         return $creneauBDD;
     }
+
+    function getCreneauxPagination($cnxDb,$messagesParPage,$pageActuelle){
+        $premiereEntree=($pageActuelle-1)*$messagesParPage;
+        $requeteBDD = "SELECT * FROM creneau ORDER BY id DESC LIMIT $messagesParPage OFFSET $premiereEntree";
+        $creneauBDD = mysqli_query($cnxDb, $requeteBDD);
+        return $creneauBDD;
+    }
     
     //Récupération des professseurs
     function getProfesseurs($cnxDb){
@@ -31,14 +38,16 @@
     //encodage pour la BDD
     $commentaireAvant = mysqli_real_escape_string($cnxDb,$commentaireAvant);
     $commApres = mysqli_real_escape_string($cnxDb,$commApres);
+    $dateActuelle = date_create(date("Y-m-d H:i:s"))->format("Y-m-d\TH:i:s");
     // création de la requête
-    $query = "INSERT INTO creneau(idProf,dateDebut,duree,exclusivite,datePublic,libre,commentaireAvant,commentaireApres,note) VALUES('$idProf','$date','$duree','$excl','DATE()','$lib','$commentaireAvant','$commApres','$note') ";
+    $query = "INSERT INTO creneau(idProf,dateDebut,duree,exclusivite,datePublic,libre,commentaireAvant,commentaireApres,note) VALUES('$idProf','$date','$duree','$excl','$dateActuelle','$lib','$commentaireAvant','$commApres','$note') ";
         echo $query;
         if (mysqli_query($cnxDb,$query)){
             $message= "Le créneau a été ajouté avec succès";
         } else{
             $message = "Error: " . $query . "<br>" . mysqli_error($cnxDb);
         }
+        echo $message;
     }
 
     function getCreneauByItem($cnxDb,$item){
@@ -59,4 +68,13 @@
         } else{
             $message = "Error: " . $query . "<br>" . mysqli_error($cnxDb);
         }
+        echo $message;
+    }
+
+    function nbrPages($cnxDb){
+        $query = "SELECT COUNT(*) AS total FROM creneau";
+        $resultat = mysqli_query($cnxDb,$query);
+        $donnees = mysqli_fetch_assoc($resultat);
+        $total = $donnees['total'];
+        return $total;
     }

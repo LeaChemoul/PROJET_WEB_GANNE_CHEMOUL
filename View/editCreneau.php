@@ -5,10 +5,6 @@ require_once "header.inc.php";
 include "../Model/setup.inc.php";
 include "../Controller/creneauController.php";
 
-
-/* $cmd = @$_REQUEST['cmd'];
- $item = @$_REQUEST['item'];
- */
 $cmd = filter_input(INPUT_GET, 'cmd',FILTER_SANITIZE_STRING);
 $item = filter_input(INPUT_GET, 'item',FILTER_SANITIZE_NUMBER_INT);
  

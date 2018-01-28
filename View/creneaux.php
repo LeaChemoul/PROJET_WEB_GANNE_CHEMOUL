@@ -101,22 +101,36 @@
                                     <?php echo "$unCreneau[commentaireApres]" ?>
                                 </td>
                                 <td>
-                                    <?php echo "$unCreneau[note]" ?>
+                                    <?php if($unCreneau["note"]==0) echo ""; else echo "$unCreneau[note]"; ?>
                                 </td>
                                 <td>
-                                    <a class="btn btn-link" href="creneaux.php?cmd=delete&item=<?php echo $key ?>">Supprimer</a>
+                                    <a class="btn btn-link" href="creneaux.php?page=1&cmd=delete&item=<?php echo $key ?>">Supprimer</a>
                                     <a class="btn btn-link" href="editCreneau.php?cmd=update&item=<?php echo $key ?>">Modifier</a>
                                 </td>
                             </tr>
                             <?php
                         }
                         }
+
+                        echo '<p align="center" style="color:white">Page : ';
+                        for($i=1; $i<=$nombrePages; $i++)
+                        {
+                            if($i==$pageActuelle)
+                            {
+                                echo ' [ '.$i.' ] ';
+                            }
+                            else //Sinon...
+                            {
+                                echo ' <a href="creneaux.php?page='.$i.'">'.$i.'</a> ';
+                            }
+                        }
+                        echo '</p>';
                         ?>
                         <tr>
-                            <td>
+                            <td colspan="4">
                                 <a href="editCreneau.php?cmd=add" class="btn btn-outline-danger">Ajouter</a>
                             </td>
-                            <td>
+                            <td colspan="6">
                                 <input type="button" class="btn btn-outline-danger" value="Afficher/Cacher les professeurs" onclick="masquer_div('professeur');" />
                             <td>
                         </tr>

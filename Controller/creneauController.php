@@ -12,13 +12,20 @@
     if(isset($cmd) && $cmd=='add'){
         $dateDebut = date_create($_POST['dateC'])->format("Y-m-d\TH:i:s");
         $duree=filter_input(INPUT_POST,'duree',FILTER_SANITIZE_NUMBER_FLOAT);
-        if(isset($_POST['exclu']))
-            $exclusif = ($_POST['exclu'] == 'Y')? true:false;
+        if(isset($_POST['exclu'])){
+            if($_POST['exclu'] == 'Y')
+                $exclusif = true;
+            else
+                $exclusif = false;
+        }
         else $exclusif = false;
-        if(isset($_POST['libre']))
-            $lib = ($_POST['libre'] == 'Y')? true:false;
+        if(isset($_POST['libre'])){
+            if($_POST['libre'] == 'Y')
+                $lib = true;
+            else
+                $lib = false;
+        }
         else $lib = true;
-        $libre = ($lib == "Y")? true:false;
         $idProf = filter_input(INPUT_POST,'prof',FILTER_SANITIZE_NUMBER_FLOAT);
         $commAv =$_POST['commentaireAvant'];
         $commAp =filter_input(INPUT_POST,'commentaireApres',FILTER_SANITIZE_STRING);
@@ -27,20 +34,27 @@
         $note = filter_input(INPUT_POST,'note',FILTER_SANITIZE_NUMBER_FLOAT);
         if($note == "")
             $note = NULL;
-        addCreneau($cnxDb,$idProf,$duree,$dateDebut,$exclusif,$libre,$commAv,$commAp,$note);
+        addCreneau($cnxDb,$idProf,$duree,$dateDebut,$exclusif,$lib,$commAv,$commAp,$note);
     }
 
     //UPDATE
     if (isset($cmd) && $cmd == 'update' && $item != 0){
         $dateDebut = date_create($_POST['dateC'])->format("Y-m-d\TH:i:s");
         $duree=filter_input(INPUT_POST,'duree',FILTER_SANITIZE_NUMBER_FLOAT);
-        if(isset($_POST['exclu']))
-            $exclusif = ($_POST['exclu'] == 'Y')? true:false;
+        if(!empty($_POST['exclu'])){
+            if($_POST['exclu'] == 'Y')
+                $exclusif = true;
+            else
+                $exclusif = false;
+        }
         else $exclusif = false;
-        if(isset($_POST['libre']))
-            $lib = ($_POST['libre'] == 'Y')? true:false;
+        if(!empty($_POST['libre'])){
+            if($_POST['libre'] == 'Y')
+                $lib = true;
+            else
+                $lib = false;
+        }
         else $lib = true;
-        $libre = ($lib == "Y")? true:false;
         $idProf = filter_input(INPUT_POST,'prof',FILTER_SANITIZE_NUMBER_FLOAT);
         $commAv =filter_input(INPUT_POST,'commentaireAvant',FILTER_SANITIZE_STRING);
         $commAp =filter_input(INPUT_POST,'commentaireApres',FILTER_SANITIZE_STRING);
@@ -49,13 +63,31 @@
         $note = filter_input(INPUT_POST,'note',FILTER_SANITIZE_NUMBER_FLOAT);
         if($note == "")
             $note = NULL;
-        updateCreneau($cnxDb,$item,$dateDebut,$duree,$idProf,$exclusif,$commAv,$libre,$commAp,$note);
+        updateCreneau($cnxDb,$item,$dateDebut,$duree,$idProf,$exclusif,$commAv,$lib,$commAp,$note);
+    }
+
+    //GESTION DE LA PAGINATION DE LA LISTE
+    $messagesParPage = 5;
+    $total = nbrPages($cnxDb);
+    $nombrePages = ceil($total/$messagesParPage);
+    if(isset($_GET['page']))
+    {
+        $pageActuelle=intval($_GET['page']);
+
+        if($pageActuelle>$nombrePages)
+        {
+            $pageActuelle=$nombrePages;
+        }
+    }
+    else // Sinon
+    {
+        $pageActuelle=1;
     }
 
     //Recupération des créneaux
     $listeCreneau = Array();
     $listeProfs = Array();
-    $creneauBDD = getCreneaux($cnxDb);
+    $creneauBDD = getCreneauxPagination($cnxDb,$messagesParPage,$pageActuelle);
     $profBDD = getProfesseurs($cnxDb);
 
     if($creneauBDD != FALSE){
@@ -71,3 +103,5 @@
             $listeProfs[$row["idProf"]]=["nom" => $row ["nom"],"prenom"=>$row["prenom"]];
         }
     }
+
+

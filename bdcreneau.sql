@@ -1,12 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.7.0
--- https://www.phpmyadmin.net/
---
--- Hôte : 127.0.0.1
--- Généré le :  mer. 24 jan. 2018 à 22:13
--- Version du serveur :  10.1.26-MariaDB
--- Version de PHP :  7.1.8
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
@@ -19,7 +10,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `dbcreneau`
+-- Base de données :  `bdcreneau`
 --
 
 -- --------------------------------------------------------
@@ -46,12 +37,12 @@ CREATE TABLE `creneau` (
 --
 
 INSERT INTO `creneau` (`id`, `idProf`, `dateDebut`, `duree`, `exclusivite`, `datePublic`, `libre`, `commentaireAvant`, `commentaireApres`, `note`) VALUES
-(1, 0, '0000-00-00 00:00:00', 0, 0, '2017-11-07 03:30:03', 1, '','', 0),
-(6, 0, '0000-00-00 00:00:00', 3840, 1, '0000-00-00 00:00:00', 1, 'Un commentaire.','Parfait.', 20),
-(7, 10, '2018-01-24 21:06:56', 0, 1, '0000-00-00 00:00:00', 1, 'Venir en avance.','', 0),
-(8, 10, '2018-01-24 21:07:02', 0, 1, '0000-00-00 00:00:00', 1, 'Venir en avance.','', 0),
-(16, 0, '0000-00-00 00:00:00', 2320, 0, '0000-00-00 00:00:00', 0, 'Pas de commentaire','Blabla', 10),
-(17, 1, '0000-00-00 00:00:00', 1100, 0, '0000-00-00 00:00:00', 1, 'Se prÃ©senter 10 min Ã  l\'avance.','', 0);
+(1, 0, '2018-10-18 11:00:00', 41867, 0, '2017-11-07 03:30:03', 1, '', '', 0),
+(6, 0, '2018-01-28 20:12:38', 504, 1, '2019-03-14 07:20:17', 0, 'Venir avec un ordinateur.', 'Parfait.', 20),
+(7, 10, '2018-01-28 20:14:42', 1235, 1, '2017-11-22 10:00:00', 1, 'Venir en avance.', '', 0),
+(16, 0, '2018-04-28 05:36:00', 2320, 0, '2017-09-18 11:22:00', 0, 'Pas de commentaire', 'Passable.', 9),
+(20, 9, '2017-09-14 19:16:10', 122259, 1, '2018-01-28 20:16:59', 0, 'Se prÃ©senter avec une piÃ¨ce d\'identitÃ©.', 'L&#39;Ã©lÃ¨ve peut mieux faire.', 11),
+(21, 11, '2018-01-01 20:17:05', 20059, 0, '2018-01-28 20:17:41', 0, 'Se prÃ©senter avec sa carte Ã©tudiante.', '', 0);
 
 -- --------------------------------------------------------
 
@@ -61,9 +52,9 @@ INSERT INTO `creneau` (`id`, `idProf`, `dateDebut`, `duree`, `exclusivite`, `dat
 
 CREATE TABLE `professeur` (
   `idProf` int(11) NOT NULL,
-  `nom` varchar(20) COLLATE utf8_general_ci NOT NULL,
-  `prenom` varchar(20) COLLATE utf8_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `nom` varchar(20) NOT NULL,
+  `prenom` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `professeur`
@@ -82,6 +73,7 @@ INSERT INTO `professeur` (`idProf`, `nom`, `prenom`) VALUES
 (9, 'Roger', 'Marie'),
 (10, 'Carlisle', 'Henry'),
 (11, 'Claudet', 'Antoine');
+
 --
 -- Index pour les tables déchargées
 --
@@ -107,7 +99,7 @@ ALTER TABLE `professeur`
 -- AUTO_INCREMENT pour la table `creneau`
 --
 ALTER TABLE `creneau`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- Contraintes pour les tables déchargées
 --
