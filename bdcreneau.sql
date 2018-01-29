@@ -1,3 +1,12 @@
+-- phpMyAdmin SQL Dump
+-- version 4.7.0
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1
+-- Généré le :  lun. 29 jan. 2018 à 19:42
+-- Version du serveur :  10.1.26-MariaDB
+-- Version de PHP :  7.1.8
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
@@ -28,6 +37,7 @@ CREATE TABLE `creneau` (
   `datePublic` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `libre` tinyint(1) NOT NULL DEFAULT '0',
   `commentaireAvant` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `aEuLieu` tinyint(1) DEFAULT NULL,
   `commentaireApres` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `note` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -36,13 +46,13 @@ CREATE TABLE `creneau` (
 -- Déchargement des données de la table `creneau`
 --
 
-INSERT INTO `creneau` (`id`, `idProf`, `dateDebut`, `duree`, `exclusivite`, `datePublic`, `libre`, `commentaireAvant`, `commentaireApres`, `note`) VALUES
-(1, 0, '2018-10-18 11:00:00', 41867, 0, '2017-11-07 03:30:03', 1, '', '', 0),
-(6, 0, '2018-01-28 20:12:38', 504, 1, '2019-03-14 07:20:17', 0, 'Venir avec un ordinateur.', 'Parfait.', 20),
-(7, 10, '2018-01-28 20:14:42', 1235, 1, '2017-11-22 10:00:00', 1, 'Venir en avance.', '', 0),
-(16, 0, '2018-04-28 05:36:00', 2320, 0, '2017-09-18 11:22:00', 0, 'Pas de commentaire', 'Passable.', 9),
-(20, 9, '2017-09-14 19:16:10', 122259, 1, '2018-01-28 20:16:59', 0, 'Se prÃ©senter avec une piÃ¨ce d\'identitÃ©.', 'L&#39;Ã©lÃ¨ve peut mieux faire.', 11),
-(21, 11, '2018-01-01 20:17:05', 20059, 0, '2018-01-28 20:17:41', 0, 'Se prÃ©senter avec sa carte Ã©tudiante.', '', 0);
+INSERT INTO `creneau` (`id`, `idProf`, `dateDebut`, `duree`, `exclusivite`, `datePublic`, `libre`, `commentaireAvant`, `aEuLieu`, `commentaireApres`, `note`) VALUES
+(7, 0, '2018-01-28 20:14:42', 85355, 1, '2017-11-22 10:00:00', 0, 'Venir en avance.', NULL, '', 0),
+(16, 0, '2018-04-28 05:36:00', 3840, 0, '2017-09-18 11:22:00', 1, 'Pas de commentaire', NULL, 'Passable.', 9),
+(20, 9, '2017-09-14 19:16:10', 122259, 1, '2018-01-28 20:16:59', 0, 'Se prÃ©senter avec une piÃ¨ce d\'identitÃ©.', NULL, 'L&#39;Ã©lÃ¨ve peut mieux faire.', 11),
+(21, 0, '2018-01-01 20:17:05', 205419, 0, '2018-01-28 20:17:41', 0, 'Se prÃ©senter avec sa carte Ã©tudiante.', NULL, '', 0),
+(22, 0, '2018-01-28 21:32:29', 12719, 0, '2018-01-28 21:32:32', 0, '', NULL, '', 0),
+(23, 0, '2018-01-28 21:32:40', 5239, 0, '2018-01-28 21:32:42', 1, '', NULL, '', 0);
 
 -- --------------------------------------------------------
 
@@ -99,7 +109,7 @@ ALTER TABLE `professeur`
 -- AUTO_INCREMENT pour la table `creneau`
 --
 ALTER TABLE `creneau`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- Contraintes pour les tables déchargées
 --

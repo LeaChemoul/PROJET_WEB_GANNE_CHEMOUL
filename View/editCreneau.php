@@ -21,6 +21,7 @@ if (!isset($unCreneau)){
     $unCreneau->commentaireAvant = '';
     $unCreneau->commentaireApres = '';
     $unCreneau->note = '';
+    $unCreneau->aEuLieu = false;
 }
 ?>
 <!DOCTYPE html>
@@ -89,7 +90,8 @@ if (!isset($unCreneau)){
                             <b>Créneau exclusif (pas d'autre créneau au même moment)</b>
                         </td>
                         <td>
-                            <input type="checkbox" name="exclu" value = "Y" <?php if ($unCreneau->exclusivite == true)echo "checked" ?>>
+                            <input type="radio" name="exclu" value="Y"  <?php if ($unCreneau->exclusivite == true)echo "checked" ?>/> Oui
+                            <input type="radio" name="exclu" value="N"  <?php if ($unCreneau->exclusivite == false)echo "checked" ?> /> Non
                         </td>
                     </tr>
                     <tr height="100">
@@ -109,12 +111,21 @@ if (!isset($unCreneau)){
                             <input type="radio" name="libre" value="N" <?php if ($unCreneau->libre == false) echo "checked" ?> /> Non
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            <b>La soutenance a eu lieu</b>
+                        </td>
+                        <td>
+                            <input type="radio" name="aEuLieu" id="euLieu" value="Y"  onclick="empecherSaisie();" <?php if ($unCreneau->aEuLieu == true)echo "checked" ?>/> Oui
+                            <input type="radio" name="aEuLieu" value="N"  <?php if ($unCreneau->aEuLieu == false)echo "checked" ?> onclick="empecherSaisie()"/> Non
+                        </td>
+                    </tr>
                     <tr height="100">
                         <td>
                             <b>Commentaire après soutenance</b>
                         </td>
                         <td>
-                            <textarea style="width : 100% ; height : 100%" name="commentaireApres"><?php echo $unCreneau->commentaireApres ?></textarea>
+                            <textarea style="width : 100% ; height : 100%" id="siSoutenu" name="commentaireApres"><?php echo $unCreneau->commentaireApres ?></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -122,7 +133,7 @@ if (!isset($unCreneau)){
                             <b>Note de soutenance (/20)</b>
                         </td>
                         <td>
-                            <input type="number" max=20 name="note" value=<?php echo $unCreneau->note;?>>
+                            <input type="number" max=20 id="note" name="note" value=<?php echo $unCreneau->note;?>>
                     </tr>
                     <tr>
                         <td colspan="2">
@@ -132,7 +143,9 @@ if (!isset($unCreneau)){
                 </table>
             </form>
         </div>
-
+        <script>
+            empecherSaisie();
+        </script>
     </body>
 </html>
 
